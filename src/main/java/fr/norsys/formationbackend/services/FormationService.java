@@ -24,8 +24,8 @@ public class FormationService {
             formation.setTitre(newFormation.getTitre());
             formation.setDescription(newFormation.getDescription());
             formation.setDateDebut(newFormation.getDateDebut());
-            formation.setDateFin(newFormation.getDateFin()); // Fix here: set dateFin with newFormation's dateFin
-            formation = formationRepository.save(formation); // Save the updated formation
+            formation.setDateFin(newFormation.getDateFin());
+            formation = formationRepository.save(formation);
         }
         return formation;
     }
@@ -42,8 +42,11 @@ public class FormationService {
     public Formation getFormation(Long id){
         return formationRepository.findById(id).orElse(null);
     }
-
     public List<Formation> getAllFormations(){
         return formationRepository.findAll();
+    }
+
+    public List<Formation> searchFormation(String keyword){
+        return formationRepository.findByTitreContaining(keyword);
     }
 }

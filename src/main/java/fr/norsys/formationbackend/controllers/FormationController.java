@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/formations")
-@CrossOrigin(origins = "http://localhost:4200") // Add this line
+@CrossOrigin(origins = "http://localhost:4200")
 public class FormationController {
 
     @Autowired
@@ -56,6 +56,12 @@ public class FormationController {
     @GetMapping("")
     public ResponseEntity<List<Formation>> getAllFormations() {
         List<Formation> formations = formationService.getAllFormations();
+        return new ResponseEntity<>(formations, HttpStatus.OK);
+    }
+
+    @GetMapping("search/{search}")
+    public ResponseEntity<List<Formation>> searchFormations(@PathVariable String search) {
+        List<Formation> formations = formationService.searchFormation(search);
         return new ResponseEntity<>(formations, HttpStatus.OK);
     }
 }
